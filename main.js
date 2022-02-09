@@ -36,3 +36,18 @@ Object.defineProperty(data[1], "name",{//cette méthode permet de donner l'autor
 data[1].name = "coucou";
 console.log(data[1].name);
 });
+
+//création d'un objet:
+
+let bruno = {
+    nom:"Dee",       //nom c'est la clé à droite valeur ce qui est à gauche sont des clées
+    prenom: "John",
+    taille: 1.7,
+    sexe:"homme",
+    bonjour:function(){
+        alert("bonjour de " + this.prenom + "" + this.nom); //this évite de réecrire la variable bruno
+    },
+  };
+
+  bruno.bonjour();
+//console.log(bruno["taille"]);
