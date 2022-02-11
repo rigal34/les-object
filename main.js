@@ -45,9 +45,150 @@ let bruno = {
     taille: 1.7,
     sexe:"homme",
     bonjour:function(){
-        alert("bonjour de " + this.prenom + "" + this.nom); //this évite de réecrire la variable bruno
+        //alert("bonjour de " + this.prenom + "" + this.nom); //this évite de réecrire la variable bruno
     },
   };
 
   bruno.bonjour();
 //console.log(bruno["taille"]);
+
+
+//7 ASTUCE AVEC LES OBJECTS
+
+ //1.----------CLONER un objet------------------------------------------------------------------------
+
+ const utilisateur = {
+     nom : "Tom",
+     age : 45,
+     taille: 185
+ }
+
+ 
+const utilisateur2 = {
+    ...utilisateur,  //spray opérateur permet de cloner
+    poids:85//je peux ajouter aussi
+}
+
+console.log(utilisateur2);//{ nom: "Tom", age: 45, taille: 185, poids: 85 }
+
+
+
+
+//2. ASSEMBLER DES OBJETS
+
+const panierFruitsRouges = {
+    cerises : 10,
+    fambroises : 5,
+    fraises : 20
+}
+
+const panierFruitsJaunes = {
+    banane : 15,
+    citron : 10,
+    poire : 7
+}
+
+const panierDeFruits = {
+    
+    ...panierFruitsRouges,
+    ...panierFruitsJaunes 
+
+}
+
+console.log(panierDeFruits);//{ cerises: 10, fambroises: 5, fraises: 20, banane: 15, citron: 10, poire: 7 }
+
+
+
+
+
+
+
+//3. -------Itérer avec for in ---------------------------------------
+
+
+const chatsRefuge = {
+
+    siamois : 2,
+    persan : 7,
+    sphynx : 3,
+    ragdoll : 4
+
+}
+
+for (const mattou in chatsRefuge){
+
+    console.log(mattou, chatsRefuge[mattou]);//affiche les noms,m'affiche les nombres
+}
+
+console.log(chatsRefuge["siamois"]);// 2
+
+
+
+//4.--------enlever une propriété----------------------------------------------------
+
+const voiture = {
+marque: "ferrari",
+modele: "Enzo",
+couleur: "rouge" 
+
+}
+
+
+const sansCouleur = ({couleur, ...rigal }) => { //(destructuring "couleur"),(reste opérator "...rigal") et ce qui reste je le retourne pouur en faire un nouvel objet 
+    console.log(couleur);
+    return rigal;
+}
+
+sansCouleur(voiture);//rouge
+
+//c'est du destructuring j'ai pris couleur pour que rouge soit retourné dans mon log et rigal est le reste qui ne s'affiche pas
+
+console.log(sansCouleur(voiture));//{ marque: "ferrari", modele: "Enzo" }
+
+
+
+//5.--------- DESTRUCTURER EN CHANGEANT LE NOM--------------------------------
+
+const pays = {
+
+    nom: "Liechtenstein",
+    population: 38749,
+    capital: "Vaduz"
+
+
+}
+
+
+const {nom} = pays;//je prends le nom de pays
+
+console.log(nom);//Liechtenstein
+
+
+const{nom : rigalBruno} = pays;
+console.log(rigalBruno); //Liechtenstein
+
+//on peut dire maintenant cette constante s'appelle rigalBruno et à comme valeur Liechtenstein
+
+
+
+
+
+//6.additionner toutes les valeurs d'un objet rapidement 
+
+
+const depense = {
+
+chauffage : 100,
+voiture : 70,
+internet : 30,
+telephone : 30,
+assurance : 35,
+mutuelle : 20,
+nourriture : 400,
+loisirs : 200 
+}
+
+//objet de js mets les valeurs sous forme de tabbleau [ 100, 70, 30, 30, 35, 20, 400, 200 ]
+const total = Object.values(depense).reduce((accumulation,depense) => accumulation + depense);
+
+console.log(total);//885
